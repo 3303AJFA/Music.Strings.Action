@@ -93,29 +93,76 @@
   addEventListener("resize", onScroll);
   onScroll();
 
-  /* ---------- style meter climbs on the beat (120 BPM) ---------- */
-  const ranks = [...document.querySelectorAll(".rank-row li")];
-  if (ranks.length) {
-    let step = 0, timer = null;
-    const tick = () => {
-      ranks.forEach((li, i) => li.classList.toggle("lit", i === step % (ranks.length + 2)));
-      step++;
+  /* ---------- style meter: climbs on the beat (120 BPM), shakes on every change, SHRED burns ---------- */
+  const row = document.querySelector(".rank-row");
+  if (row) {
+    const ranks = [...row.querySelectorAll("li")];
+    const top = ranks.length - 1;
+    // climb D..SHRED, hold SHRED for 4 beats, crash back to nothing
+    const seq = [...ranks.keys(), top, top, top, -1];
+    let step = 0, timer = null, lit = -2;
+    const set = idx => {
+      if (idx === lit) return;
+      const crash = idx < lit;
+      lit = idx;
+      ranks.forEach((li, i) => li.classList.toggle("lit", i === idx));
+      row.style.setProperty("--amp", `${crash ? 7 : 1 + Math.max(0, idx) * 1.1}px`);
+      row.classList.remove("shake"); void row.offsetWidth; row.classList.add("shake");
+    };
+    const tick = () => { set(seq[step % seq.length]); step++; };
+
+    // fire on the SHRED box
+    const cv = row.querySelector(".fire"), ctx = cv.getContext("2d");
+    const dpr = Math.min(2, devicePixelRatio || 1);
+    const CW = 170, CH = 140;
+    cv.width = CW * dpr; cv.height = CH * dpr; ctx.scale(dpr, dpr);
+    const parts = []; let heat = 0.2, raf = null;
+    const frame = () => {
+      const target = lit === top ? 1 : 0.22;
+      heat += (target - heat) * 0.08;
+      const n = Math.round(heat * 9);
+      for (let i = 0; i < n; i++) {
+        const side = Math.random() < 0.3;
+        parts.push({ x: side ? CW / 2 + (Math.random() < 0.5 ? -1 : 1) * (32 + Math.random() * 6) : CW / 2 + (Math.random() - 0.5) * 60,
+          y: side ? CH - 12 - Math.random() * 24 : CH - 38 - Math.random() * 6,
+          vx: (Math.random() - 0.5) * 0.6, vy: -(1 + Math.random() * 1.8) * (0.7 + heat),
+          r: 5 + Math.random() * 9 * (0.6 + heat), life: 0, max: 26 + Math.random() * 30 });
+      }
+      ctx.clearRect(0, 0, CW, CH);
+      ctx.globalCompositeOperation = "lighter";
+      for (let i = parts.length - 1; i >= 0; i--) {
+        const p = parts[i];
+        p.life++; p.x += p.vx + Math.sin((p.life + p.y) * 0.15) * 0.4; p.y += p.vy; p.r *= 0.965;
+        const t = p.life / p.max;
+        if (t >= 1 || p.r < 0.6) { parts.splice(i, 1); continue; }
+        const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r);
+        const a = (1 - t) * 0.42;
+        const col = t < 0.25 ? "255,236,160" : t < 0.55 ? "255,150,40" : "200,40,20";
+        g.addColorStop(0, `rgba(${col},${a})`); g.addColorStop(1, `rgba(${col},0)`);
+        ctx.fillStyle = g; ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill();
+      }
+      raf = requestAnimationFrame(frame);
     };
     const io = new IntersectionObserver(([e]) => {
-      if (e.isIntersecting && !timer && !reduced) timer = setInterval(tick, 500);
-      if (!e.isIntersecting && timer) { clearInterval(timer); timer = null; }
+      if (e.isIntersecting && !reduced) {
+        if (!timer) timer = setInterval(tick, 500);
+        if (!raf) raf = requestAnimationFrame(frame);
+      } else if (!e.isIntersecting) {
+        clearInterval(timer); timer = null;
+        cancelAnimationFrame(raf); raf = null;
+      }
     });
     io.observe(document.querySelector(".ranks"));
-    if (reduced) ranks[ranks.length - 1].classList.add("lit");
+    if (reduced) set(top);
   }
 
   /* ---------- characters ---------- */
   const CHARS = [
-    { name: "Vivus", alias: "The Kid", age: "14", role: "Guitarist, son", voice: "TBA", img: "assets/vivus.png",
+    { name: "Vivus", alias: "The Kid", age: "14", role: "Guitarist, cool son", voice: "TBA", img: "assets/vivus_kid.png", aka: "hand",
       pos: "18% 22%", line: "“Mom's just out on church business. She'll be back by supper. She always is.”" },
-    { name: "Mother", alias: "The Nun", age: "?", role: "Sister of the White Hand", voice: "TBA", img: "assets/mother.png",
+    { name: "Mother", alias: "The Nun", age: "?", role: "Sister of the White Hand?", voice: "TBA", img: "assets/mother.png", aka: "graffiti",
       pos: "88% 70%", line: "“The White Hand provides, little one. Eat your supper and don't ask where it comes from.”" },
-    { name: "???", alias: "The White Hand", age: "—", role: "Unknown", voice: "—", img: "assets/vivus.png", silhouette: true,
+    { name: "???", alias: "The White Hand", age: "—", role: "Unknown", voice: "—", img: "assets/vivus.png", silhouette: true, aka: "hand",
       pos: "50% 50%", line: "“Population nominal. Supper is served. Proceed.”" },
   ];
   const charEl = document.querySelector("[data-char]");
@@ -130,6 +177,7 @@
         f("name").textContent = c.name; f("alias").textContent = c.alias;
         f("age").textContent = c.age; f("role").textContent = c.role; f("voice").textContent = c.voice;
         f("line").textContent = c.line;
+        f("aka").className = `aka ${c.aka || "hand"}`;
         f("count").textContent = `${String(ci + 1).padStart(2, "0")}/${String(CHARS.length).padStart(2, "0")}`;
         f("bar").style.width = `${((ci + 1) / CHARS.length) * 100}%`;
         f("voiceImg").style.backgroundPosition = c.pos;

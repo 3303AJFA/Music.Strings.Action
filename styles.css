@@ -184,12 +184,30 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .ranks { display: grid; justify-items: center; gap: 10px; margin-top: 18px; }
 .rank-cap { font: 700 11px var(--mono); text-transform: uppercase; letter-spacing: .1em; }
 .rank-row { display: flex; gap: 6px; list-style: none; margin: 0; padding: 0; flex-wrap: wrap; justify-content: center; }
-.rank-row li {
+.rank-row li { display: grid; justify-items: center; gap: 6px; position: relative; }
+.rank-row li b {
+  position: relative; z-index: 3;
   font-weight: 900; font-size: 15px; min-width: 38px; text-align: center; padding: 7px 9px; border-radius: 5px;
   border: 1.5px solid currentColor; opacity: .35; transition: opacity .1s, background .1s, color .1s;
 }
-.rank-row li.lit { opacity: 1; background: var(--ink); color: var(--paper2); }
-.rank-row li.shred.lit { background: var(--red); border-color: var(--red); }
+.rank-row li small { font: 700 9px var(--mono); text-transform: uppercase; letter-spacing: .05em; opacity: .45; transition: opacity .1s; }
+.rank-row li.lit b { opacity: 1; background: var(--ink); color: var(--paper2); animation: pop .22s ease-out; }
+.rank-row li.lit small { opacity: 1; }
+.rank-row li.shred b { opacity: .7; border-color: var(--red); color: var(--red); }
+.rank-row li.shred.lit b {
+  background: var(--red); border-color: var(--red); color: #ffe7a0;
+  text-shadow: 0 0 6px #ff9a2a, 0 0 14px #ff5a1a; box-shadow: 0 0 18px rgba(255, 110, 30, .65);
+}
+.fire { position: absolute; left: 50%; bottom: 10px; width: 170px; height: 140px; translate: -50% 0; pointer-events: none; z-index: 2; }
+.rank-row.shake { animation: shake .32s linear; }
+@keyframes pop { 0% { scale: 1.35; } 100% { scale: 1; } }
+@keyframes shake {
+  0%, 100% { transform: translate(0, 0); }
+  15% { transform: translate(calc(var(--amp) * -1), calc(var(--amp) * .6)) rotate(-.4deg); }
+  35% { transform: translate(var(--amp), calc(var(--amp) * -.5)) rotate(.5deg); }
+  55% { transform: translate(calc(var(--amp) * -.6), calc(var(--amp) * -.4)); }
+  75% { transform: translate(calc(var(--amp) * .4), calc(var(--amp) * .3)); }
+}
 
 /* ---------- 04 characters ---------- */
 .s-chars { background: var(--mustard); padding-top: 110px; overflow: hidden; }
@@ -198,7 +216,15 @@ button { font: inherit; color: inherit; cursor: pointer; }
   margin: 0; display: flex; justify-content: center; align-items: center; gap: 2vw; flex-wrap: wrap;
   font-weight: 900; font-size: clamp(54px, 11vw, 170px); letter-spacing: -0.065em; line-height: .85; text-transform: uppercase;
 }
-.aka { font-family: var(--hand); font-weight: 400; font-size: .3em; letter-spacing: 0; text-transform: none; color: var(--red); }
+.aka { font-family: var(--hand); font-weight: 400; font-size: .3em; letter-spacing: 0; text-transform: none; color: var(--red); position: relative; }
+.aka.graffiti {
+  font-family: "Sedgwick Ave Display", var(--hand); font-size: .46em; color: #e2336b; rotate: -9deg; padding: 0 .1em;
+  text-shadow: 0 0 2px rgba(226, 51, 107, .9), 0 0 9px rgba(226, 51, 107, .45), 0 0 22px rgba(226, 51, 107, .25);
+}
+.aka.graffiti::after {
+  content: ""; position: absolute; left: 8%; right: 6%; top: 70%; height: .9em; pointer-events: none;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 40' preserveAspectRatio='none'%3E%3Cg fill='%23e2336b'%3E%3Cpath d='M9 0h3l-.4 22q-1.1 3-2.2 0z'/%3E%3Ccircle cx='10.4' cy='25' r='1.6'/%3E%3Cpath d='M33 0h2.4l-.3 12q-.9 2.4-1.8 0z'/%3E%3Cpath d='M52 0h3.4l-.5 31q-1.2 3.4-2.4 0z'/%3E%3Ccircle cx='53.6' cy='35.5' r='1.9'/%3E%3Cpath d='M78 0h2.6l-.3 17q-1 2.6-2 0z'/%3E%3Cpath d='M92 0h2l-.2 8q-.8 2-1.6 0z'/%3E%3C/g%3E%3C/svg%3E") no-repeat 0 0 / 100% 100%;
+}
 .char-stage {
   display: grid; grid-template-columns: 220px 1fr 220px; gap: 24px; align-items: start;
   max-width: 1240px; margin: 26px auto 0; position: relative;
@@ -376,3 +402,11 @@ button { font: inherit; color: inherit; cursor: pointer; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
   html { scroll-behavior: auto; }
 }
+
+/* ---------- drips: the walls start leaking further down ---------- */
+.s-chars { background: url(assets/drips_soft.png) 0 0 / 900px auto repeat-x, var(--mustard); }
+.s-strings { background: url(assets/drips_dark.png) 140px 0 / 900px auto repeat-x, var(--khaki); }
+.s-art { background: url(assets/drips_dark.png) 430px 0 / 1000px auto repeat-x, url(assets/drips_light.png) 0 0 / 900px auto repeat-x, var(--dusk); }
+.s-devlog { background: url(assets/drips_light.png) 300px 0 / 900px auto repeat-x, url(assets/drips_dark.png) 0 0 / 1100px auto repeat-x, var(--soot); }
+.s-final::before { content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none; background: url(assets/drips_dark.png) 520px 0 / 1000px auto repeat-x; }
+.s-foot { background: url(assets/drips_light.png) 600px 0 / 900px auto repeat-x, var(--black); }
