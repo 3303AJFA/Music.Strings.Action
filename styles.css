@@ -42,7 +42,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .fx-paper {
   background: url(assets/paper.png) repeat; background-size: 380px;
   mix-blend-mode: multiply;
-  opacity: clamp(0, calc(0.38 - var(--rot) * 0.6), 0.38);
+  opacity: calc(0.55 - var(--rot) * 0.55);
 }
 .fx-grime {
   background: url(assets/grime.png) repeat; background-size: 760px;
@@ -53,7 +53,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
   background: url(assets/grime.png) repeat; background-size: 520px; background-position: 210px 140px;
   filter: invert(1);
   mix-blend-mode: screen;
-  opacity: clamp(0, calc((var(--rot) - 0.6) * 0.6), 0.16);
+  opacity: clamp(0, calc((var(--rot) - 0.55) * 1.1), 0.38);
 }
 .fx-vignette {
   background: radial-gradient(ellipse at 50% 45%, transparent 45%, rgba(10, 6, 4, .85) 120%);
