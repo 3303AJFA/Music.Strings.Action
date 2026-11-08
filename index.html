@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MSA — Music. Strings. Action!</title>
+<meta name="description" content="A teenage mouse with an electric guitar searches for his missing mother in a 1968–1972 American Dream city that turns out to be a behavioral experiment. Real-time rhythm guitar roguelite.">
+<meta property="og:title" content="MSA — Music. Strings. Action!">
+<meta property="og:description" content="Real-time rhythm guitar roguelite. Cute shell, rotten core.">
+<meta property="og:image" content="assets/cma_5.jpg">
+<link rel="icon" href="favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#0b0909">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;700;800;900&family=Space+Mono:wght@400;700&family=Caveat+Brush&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- SVG filters: watercolor bleed for the painted top -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <filter id="watercolor" x="-30%" y="-30%" width="160%" height="160%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.011" numOctaves="4" seed="25" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="90" xChannelSelector="R" yChannelSelector="G"/>
+    <feGaussianBlur stdDeviation="6"/>
+  </filter>
+  <filter id="brush" x="-10%" y="-40%" width="120%" height="180%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.04 0.6" numOctaves="2" seed="7" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</svg>
+
+<!-- scroll-driven decay layers -->
+<div class="fx fx-paper" aria-hidden="true"></div>
+<div class="fx fx-grime" aria-hidden="true"></div>
+<div class="fx fx-dust" aria-hidden="true"></div>
+<div class="fx fx-vignette" aria-hidden="true"></div>
+
+<header class="nav">
+  <a class="logo" href="#top" aria-label="MSA home"><span>MSA</span></a>
+  <nav class="nav-links">
+    <a href="#game">Game</a>
+    <a href="#characters">Characters</a>
+    <a href="#strings">Strings</a>
+    <a href="#artwork">Artwork</a>
+    <a href="#devlog">Devlog</a>
+  </nav>
+  <a class="btn btn-ghost nav-cta" href="#wishlist">Wishlist <i>soon</i></a>
+</header>
+
+<main id="top">
+
+  <!-- 01 HERO -->
+  <section class="s s-hero">
+    <div class="paint" aria-hidden="true">
+      <span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span>
+      <span class="blob b4"></span><span class="blob b5"></span>
+    </div>
+    <img class="hero-street" src="assets/street.jpg" alt="" aria-hidden="true">
+    <div class="hero-inner">
+      <h1 class="hero-title" aria-label="MSA">
+        <span class="ht-word" data-parallax="-0.15">MSA</span>
+      </h1>
+      <img class="hero-vivus" src="assets/vivus_hi.png" alt="Vivus, a white lab mouse with big red eyes, waving hi" data-parallax="0.08">
+      <p class="hero-sub"><span>Music.</span> <span>Strings.</span> <span>Action!</span></p>
+      <p class="hero-tag">A rhythm guitar roguelite about a kid, a missing mother,<br>and a city that was never real.</p>
+      <div class="stores">
+        <a class="store" href="#wishlist"><b>STEAM</b><i>wishlist soon</i></a>
+        <a class="store" href="#wishlist"><b>PC</b><i>in development</i></a>
+      </div>
+    </div>
+    <div class="scroll-hint" aria-hidden="true"><span></span></div>
+  </section>
+
+  <!-- 02 MANIFEST -->
+  <section class="s s-manifest" id="game">
+    <div class="edge" data-rough="0.15" aria-hidden="true"></div>
+    <div class="num">02</div>
+    <p class="manifest" data-reveal>
+      Play as Vivus. A teenage mouse with an electric guitar, looking for his missing mother
+      across a 1968 American Dream city. Everyone here is happy. Everyone here is fed.
+      Nobody here asks who built it.
+    </p>
+  </section>
+
+  <!-- 03 TRAILER -->
+  <section class="s s-trailer">
+    <div class="edge" data-rough="0.25" aria-hidden="true"></div>
+    <div class="trailer-row">
+      <p class="side-label">Play the guitar,<br>don't manage cards</p>
+      <a class="frame trailer" href="#wishlist" aria-label="Trailer coming soon">
+        <i class="tick tl"></i><i class="tick tr"></i><i class="tick bl"></i><i class="tick br"></i>
+        <img src="assets/cma_5.jpg" alt="Vivus standing in a beam of light">
+        <span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+        <span class="trailer-cap">Trailer — soon</span>
+      </a>
+      <p class="side-label right">Your rig,<br>your run</p>
+    </div>
+    <div class="marquee outline" aria-hidden="true">
+      <div class="marquee-track"><span>SOLID SMOKIN' SHRED&nbsp;·&nbsp;</span><span>SOLID SMOKIN' SHRED&nbsp;·&nbsp;</span><span>SOLID SMOKIN' SHRED&nbsp;·&nbsp;</span><span>SOLID SMOKIN' SHRED&nbsp;·&nbsp;</span></div>
+    </div>
+    <div class="ranks">
+      <span class="rank-cap">Style meter</span>
+      <ol class="rank-row">
+        <li>D</li><li>C</li><li>B</li><li>A</li><li>S</li><li>SS</li><li class="shred">SHRED</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 04 CHARACTERS -->
+  <section class="s s-chars" id="characters">
+    <div class="edge" data-rough="0.4" aria-hidden="true"></div>
+    <div class="num">04</div>
+    <div class="char" data-char>
+      <h2 class="char-names">
+        <span class="cn-a" data-f="name">VIVUS</span>
+        <span class="aka">aka</span>
+        <span class="cn-b" data-f="alias">THE KID</span>
+      </h2>
+      <div class="char-stage">
+        <div class="char-left">
+          <div class="box"><small>Age</small><b data-f="age">14</b></div>
+          <div class="box portrait">
+            <div class="portrait-img" data-f="voiceImg"></div>
+            <small>Voiced by</small><b data-f="voice">TBA</b>
+          </div>
+        </div>
+        <img class="char-img" data-f="img" src="assets/vivus.png" alt="">
+        <div class="char-right">
+          <div class="box"><small>Role</small><b data-f="role">Guitarist, son</b></div>
+          <button class="box nav-btn" data-dir="1"><span><small data-f="nextAlias">Mother aka</small><b data-f="nextName">The Nun</b></span><i>▶</i></button>
+          <button class="box nav-btn" data-dir="-1"><i>◀</i><span><small data-f="prevAlias">??? aka</small><b data-f="prevName">The White Hand</b></span></button>
+        </div>
+        <div class="dialog">
+          <p data-f="line">“Mom's just out on church business. She'll be back by supper. She always is.”</p>
+          <div class="dialog-foot"><span class="bar"><i data-f="bar"></i></span><span data-f="count">01/03</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 STRINGS -->
+  <section class="s s-strings" id="strings">
+    <div class="edge" data-rough="0.55" aria-hidden="true"></div>
+    <div class="num">05</div>
+    <div class="strings-grid">
+      <div class="strings-left">
+        <p class="mono intro">Six strings. Six sensors. A hexaphonic pickup routes every string through its own effect chain, so every string is its own card, its own role, its own build. Lose the run, keep the story.</p>
+        <div class="string-card">
+          <div class="sc-head"><span class="sc-key" data-s="key">Q</span><span class="sc-note" data-s="note">E↓</span></div>
+          <small data-s="idx">01</small>
+          <h3 data-s="role">Damage Dealer</h3>
+          <p class="mono" data-s="desc">Hit hard, hit on the beat. On-beat notes deal bonus damage and charge Voltage.</p>
+        </div>
+      </div>
+      <div class="strings-table" role="list">
+        <div class="st-head"><span>String</span><span>Role</span><span>Pedal talk</span></div>
+        <!-- rows rendered by main.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 ARTWORK -->
+  <section class="s s-art" data-dark id="artwork">
+    <div class="edge" data-rough="0.7" aria-hidden="true"></div>
+    <h2 class="big-title">One scene,<br>two readings</h2>
+    <p class="mono art-note">Drag across the picture. Vivus sees the first one.</p>
+    <div class="gallery">
+      <button class="g-side g-prev" data-g="-1"><span class="g-btn"><i>◀</i>Prev</span><img alt="" data-thumb="prev"></button>
+      <figure class="frame g-main">
+        <i class="tick tl"></i><i class="tick tr"></i><i class="tick bl"></i><i class="tick br"></i>
+        <div class="compare">
+          <img class="cmp-a" alt="">
+          <div class="cmp-b-wrap"><img class="cmp-b" alt=""></div>
+          <div class="cmp-handle" aria-hidden="true"></div>
+          <input class="cmp-range" type="range" min="0" max="100" value="50" aria-label="Reveal the second reading">
+        </div>
+        <a class="dl" download aria-label="Download image">↓</a>
+        <figcaption class="mono"></figcaption>
+      </figure>
+      <button class="g-side g-next" data-g="1"><span class="g-btn">Next<i>▶</i></span><img alt="" data-thumb="next"></button>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER + 07 DEVLOG -->
+  <section class="s s-devlog" data-dark id="devlog">
+    <div class="edge" data-rough="0.85" data-drip aria-hidden="true"></div>
+    <form class="news" onsubmit="return msaSubscribe(event)">
+      <div class="news-l">
+        <span class="news-ico">MSA</span>
+        <p>Get the latest<br>from the lab</p>
+        <input type="email" required placeholder="ENTER YOUR EMAIL" aria-label="Email">
+        <button class="btn btn-toxic" type="submit">Tune in</button>
+      </div>
+      <p class="news-big">STAY TUNED</p>
+      <p class="news-msg mono" role="status"></p>
+    </form>
+    <div class="devlog-head">
+      <div class="num">07</div>
+      <h2 class="hand">From the lab</h2>
+      <p class="mono">Notes from development. Things get added. Some things get worse on purpose.</p>
+    </div>
+    <div class="cards">
+      <article class="card">
+        <time class="mono">2026-11-08</time>
+        <div class="card-img"><img src="assets/vivus.png" alt=""></div>
+        <h3>Vivus picks up a Flying V</h3>
+        <p class="mono">Guitar idle and attack animations, on the beat at 120 BPM.</p>
+      </article>
+      <article class="card">
+        <time class="mono">2026-11-05</time>
+        <div class="card-img strings-img"><span>E↓</span><span>A</span><span>D</span><span>G</span><span>B</span><span>E↑</span></div>
+        <h3>All six strings are open</h3>
+        <p class="mono">Distortion, Kill Switch and Echo join the pedalboard.</p>
+      </article>
+      <article class="card">
+        <time class="mono">2026-11-07</time>
+        <div class="card-img"><img src="assets/cma_3.jpg" alt=""></div>
+        <h3>Home, two ways</h3>
+        <p class="mono">The apartment gets a light reading and a dark one.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- 08 FINAL CTA -->
+  <section class="s s-final" data-dark id="wishlist">
+    <div class="edge" data-rough="1" data-drip aria-hidden="true"></div>
+    <img class="final-bg" src="assets/cma_4.jpg" alt="">
+    <div class="final-inner">
+      <h2 class="final-title"><span>PLUG</span> <span>IN.</span></h2>
+      <div class="stores dark">
+        <a class="store"><b>STEAM</b><i>wishlist soon</i></a>
+        <a class="store"><b>DISCORD</b><i>soon</i></a>
+        <a class="store"><b>X / TIKTOK</b><i>soon</i></a>
+      </div>
+      <p class="final-sub">In development<br>Real-time rhythm guitar roguelite<br>MSA 2027</p>
+    </div>
+    <div class="marquee small" aria-hidden="true">
+      <div class="marquee-track"><span>— MSA&nbsp;&nbsp;&nbsp;— MUSIC. STRINGS. ACTION!&nbsp;&nbsp;&nbsp;</span><span>— MSA&nbsp;&nbsp;&nbsp;— MUSIC. STRINGS. ACTION!&nbsp;&nbsp;&nbsp;</span><span>— MSA&nbsp;&nbsp;&nbsp;— MUSIC. STRINGS. ACTION!&nbsp;&nbsp;&nbsp;</span><span>— MSA&nbsp;&nbsp;&nbsp;— MUSIC. STRINGS. ACTION!&nbsp;&nbsp;&nbsp;</span></div>
+    </div>
+  </section>
+</main>
+
+<footer class="s s-foot" data-dark>
+  <div class="edge" data-rough="1" aria-hidden="true"></div>
+  <div class="emboss" aria-hidden="true">MSA</div>
+  <div class="foot-row mono">
+    <span>© 2026 MSA. All rights reserved.</span>
+    <span><a href="#top">Back to the light ↑</a></span>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>
