@@ -160,7 +160,7 @@
   const CHARS = [
     { name: "Vivus", alias: "The Kid", age: "14", role: "Guitarist, cool son", voice: "TBA", img: "assets/vivus_kid.png", aka: "hand",
       pos: "18% 22%", line: "“Mom's just out on church business. She'll be back by supper. She always is.”" },
-    { name: "Mother", alias: "The Nun", age: "?", role: "Sister of the White Hand?", voice: "TBA", img: "assets/mother.png", aka: "graffiti",
+    { name: "Mother", alias: "The Rock Nun", aliasHtml: 'The <span class="graffiti">Rock</span> Nun', age: "?", role: "Sister of the White Hand?", voice: "TBA", img: "assets/mother.png", aka: "hand",
       pos: "88% 70%", line: "“The White Hand provides, little one. Eat your supper and don't ask where it comes from.”" },
     { name: "???", alias: "The White Hand", age: "—", role: "Unknown", voice: "—", img: "assets/vivus.png", silhouette: true, aka: "hand",
       pos: "50% 50%", line: "“Population nominal. Supper is served. Proceed.”" },
@@ -174,7 +174,8 @@
       const c = CHARS[ci], n = CHARS[(ci + 1) % CHARS.length], p = CHARS[(ci - 1 + CHARS.length) % CHARS.length];
       const img = f("img");
       const apply = () => {
-        f("name").textContent = c.name; f("alias").textContent = c.alias;
+        f("name").textContent = c.name;
+        if (c.aliasHtml) f("alias").innerHTML = c.aliasHtml; else f("alias").textContent = c.alias;
         f("age").textContent = c.age; f("role").textContent = c.role; f("voice").textContent = c.voice;
         f("line").textContent = c.line;
         f("aka").className = `aka ${c.aka || "hand"}`;
