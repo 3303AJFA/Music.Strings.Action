@@ -262,12 +262,4 @@
     show(0);
   }
 
-  /* ---------- newsletter (no backend yet) ---------- */
-  window.msaSubscribe = e => {
-    e.preventDefault();
-    const msg = document.querySelector(".news-msg");
-    msg.textContent = "The list opens soon. You're early. Good.";
-    e.target.reset();
-    return false;
-  };
 })();
