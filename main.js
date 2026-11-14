@@ -93,6 +93,31 @@
   addEventListener("resize", onScroll);
   onScroll();
 
+  /* ---------- intro: MainMenuScreen.Leave() reversed (same timings and curves, time runs backwards) ----------
+     Leave(): rot 0->1 over 1.1 s and vignette over 1.3 s (InQuad), Vivus shakes 6 px for 1.3 s, title 1 -> 1.04
+     over 1.4 s, buttons and tagline out in 0.4 s, at 1.0 s black in over 0.45 s. Whole thing = 1.45 s.
+     The curves are baked into CSS keyframes (styles.css, intro-*); here we only decide when to start. */
+  if (root.classList.contains("intro-on")) {
+    let started = false;
+    const finish = () => {
+      root.classList.remove("intro-on", "intro-run");
+      document.querySelectorAll(".intro-l").forEach(el => el.remove());
+    };
+    const run = () => {
+      root.classList.add("intro-run");
+      setTimeout(finish, 1500);
+    };
+    // start once fonts and the hero pictures are ready (or after 1.5 s), then hold black a moment
+    const go = () => {
+      if (started) return;
+      started = true;
+      const imgs = [...document.querySelectorAll(".s-hero img")].map(im => im.decode ? im.decode().catch(() => {}) : null);
+      Promise.all([document.fonts ? document.fonts.ready : null, ...imgs]).then(() => setTimeout(run, 300));
+    };
+    if (document.readyState === "complete") go();
+    else { addEventListener("load", go, { once: true }); setTimeout(go, 1500); }
+  }
+
   /* ---------- style meter: climbs on the beat (120 BPM), shakes on every change, SHRED burns ---------- */
   const row = document.querySelector(".rank-row");
   if (row) {

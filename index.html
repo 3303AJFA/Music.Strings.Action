@@ -20,6 +20,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;700;800;900&family=Space+Mono:wght@400;700&family=Caveat+Brush&family=Sedgwick+Ave+Display&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<script>if (!matchMedia("(prefers-reduced-motion: reduce)").matches) document.documentElement.classList.add("intro-on");</script>
 </head>
 <body>
 
@@ -41,6 +42,11 @@
 <div class="fx fx-grime" aria-hidden="true"></div>
 <div class="fx fx-dust" aria-hidden="true"></div>
 <div class="fx fx-vignette" aria-hidden="true"></div>
+<!-- intro: own layers (opacity only, so the compositor can run it without repainting the page) -->
+<div class="intro-l intro-grime" aria-hidden="true"></div>
+<div class="intro-l intro-dust" aria-hidden="true"></div>
+<div class="intro-l intro-vig" aria-hidden="true"></div>
+<div class="intro-l intro-black" aria-hidden="true"></div>
 
 <header class="nav">
   <a class="logo" href="#top" aria-label="MSA home"><span>MSA</span></a>
