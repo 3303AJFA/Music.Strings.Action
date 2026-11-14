@@ -197,12 +197,12 @@
 
   /* ---------- characters ---------- */
   const CHARS = [
-    { name: "Vivus", alias: "The Kid", age: "14", role: "Guitarist, cool son", voice: "TBA", img: "assets/vivus_kid.png", aka: "hand",
-      pos: "18% 22%", line: "“Mom's just out on church business. She'll be back by supper. She always is.”" },
-    { name: "Mother", alias: "The Rock Nun", aliasHtml: 'The <span class="graffiti">Rock</span> Nun', age: "?", role: "Sister of the White Hand?", voice: "TBA", img: "assets/mother.png", aka: "hand",
-      pos: "88% 70%", line: "“The White Hand provides, little one. Eat your supper and don't ask where it comes from.”" },
-    { name: "???", alias: "The White Hand", age: "—", role: "Unknown", voice: "—", img: "assets/vivus.png", silhouette: true, aka: "hand",
-      pos: "50% 50%", line: "“Population nominal. Supper is served. Proceed.”" },
+    { name: "Vivus", alias: "The Kid", age: "14", role: "Guitarist, cool son", img: "assets/vivus_kid.png", aka: "hand",
+      line: "“Mom's just out on church business. She'll be back by supper. She always is.”" },
+    { name: "Mother", alias: "The Rock Nun", aliasHtml: 'The <span class="graffiti">Rock</span> Nun', age: "?", role: "Sister of the White Hand?", img: "assets/mother.png", aka: "hand",
+      line: "“The White Hand provides, little one. Eat your supper and don't ask where it comes from.”" },
+    { name: "???", alias: "The White Hand", age: "—", role: "Unknown", img: "assets/vivus.png", silhouette: true, aka: "hand",
+      line: "“Population nominal. Supper is served. Proceed.”" },
   ];
   const charEl = document.querySelector("[data-char]");
   if (charEl) {
@@ -215,12 +215,11 @@
       const apply = () => {
         f("name").textContent = c.name;
         if (c.aliasHtml) f("alias").innerHTML = c.aliasHtml; else f("alias").textContent = c.alias;
-        f("age").textContent = c.age; f("role").textContent = c.role; f("voice").textContent = c.voice;
+        f("age").textContent = c.age; f("role").textContent = c.role;
         f("line").textContent = c.line;
         f("aka").className = `aka ${c.aka || "hand"}`;
         f("count").textContent = `${String(ci + 1).padStart(2, "0")}/${String(CHARS.length).padStart(2, "0")}`;
         f("bar").style.width = `${((ci + 1) / CHARS.length) * 100}%`;
-        f("voiceImg").style.backgroundPosition = c.pos;
         f("nextAlias").textContent = `${n.name} aka`; f("nextName").textContent = n.alias;
         f("prevAlias").textContent = `${p.name} aka`; f("prevName").textContent = p.alias;
         img.src = c.img; img.alt = `${c.name}, ${c.alias}`;
