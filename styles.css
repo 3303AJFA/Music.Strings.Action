@@ -37,12 +37,18 @@ a { color: inherit; }
 button { font: inherit; color: inherit; cursor: pointer; }
 .mono { font-family: var(--mono); font-size: 13px; line-height: 1.45; letter-spacing: -0.01em; }
 
-/* ---------- decay overlays ---------- */
+/* ---------- decay overlays ----------
+   paper, grime and dust live INSIDE each section, between its background and its content (z-index -1 in an isolated
+   section), so text and pictures stay readable; background-attachment: fixed keeps the texture still like before.
+   Only the vignette stays on top of the whole page. */
+.s { isolation: isolate; }
+.sec-fx { position: absolute; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
+.sec-fx > i { position: absolute; inset: 0; background-attachment: fixed !important; }
 .fx { position: fixed; inset: 0; pointer-events: none; z-index: 40; }
 .fx-paper {
   background: url(assets/paper.png) repeat; background-size: 380px;
   mix-blend-mode: multiply;
-  opacity: calc(0.55 - var(--rot) * 0.55);
+  opacity: calc(0.25 - var(--rot) * 0.25);
 }
 .fx-grime {
   background: url(assets/grime.png) repeat; background-size: 760px;
@@ -321,7 +327,7 @@ html.intro-run .hero-tag, html.intro-run .s-hero .stores { animation: intro-late
 .b5 { width: 26vw; height: 22vw; right: 8%; bottom: 8%; background: radial-gradient(circle, #e9c8de, transparent 70%); }
 .hero-street {
   position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: 34vh; object-fit: cover; object-position: center 30%;
-  mix-blend-mode: multiply; opacity: .28; filter: contrast(1.2) sepia(.4);
+  mix-blend-mode: multiply; opacity: .2; filter: contrast(1.2) sepia(.4);
   -webkit-mask-image: linear-gradient(to top, #000 40%, transparent);
           mask-image: linear-gradient(to top, #000 40%, transparent);
 }

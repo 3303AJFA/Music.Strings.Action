@@ -93,6 +93,15 @@
   addEventListener("resize", onScroll);
   onScroll();
 
+  /* ---------- decay layers under each section's content (see .sec-fx in styles.css) ---------- */
+  document.querySelectorAll(".s").forEach(sec => {
+    const fx = document.createElement("div");
+    fx.className = "sec-fx";
+    fx.setAttribute("aria-hidden", "true");
+    fx.innerHTML = '<i class="fx-paper"></i><i class="fx-grime"></i><i class="fx-dust"></i>';
+    sec.prepend(fx);
+  });
+
   /* ---------- flip buttons (two faces: the current one tips back, the red one rolls up) ----------
      Each face is a span carrying the button's own classes, so it keeps the button's look; the link itself becomes a bare frame. */
   document.querySelectorAll(".nav-links a, .nav-cta, .store, .btn-toxic").forEach(el => {
