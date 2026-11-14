@@ -93,6 +93,37 @@
   addEventListener("resize", onScroll);
   onScroll();
 
+  /* ---------- "Get in touch": collect an email ----------
+     data-endpoint on the form = where emails go (a POST with field "email"). Empty = fall back to a mail to us,
+     so nothing is lost before a collector is set up. */
+  const form = document.querySelector(".news-form");
+  if (form) {
+    const msg = document.querySelector(".news-msg");
+    const say = t => { if (msg) msg.textContent = t; };
+    form.addEventListener("submit", async e => {
+      e.preventDefault();
+      const email = form.email.value.trim();
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { say("That doesn't look like an email."); form.email.focus(); return; }
+      const url = form.dataset.endpoint;
+      if (!url) {
+        location.href = "mailto:notch33rsl0ve@gmail.com?subject=" + encodeURIComponent("MSA: keep me posted") +
+          "&body=" + encodeURIComponent("Please keep me posted about MSA: " + email);
+        return;
+      }
+      form.classList.add("sent");
+      say("Sending…");
+      try {
+        const body = new FormData(); body.append(form.dataset.field || "email", email);
+        await fetch(url, { method: "POST", body, mode: "no-cors" });
+        say("Got it. We'll be in touch.");
+        form.reset();
+      } catch {
+        form.classList.remove("sent");
+        say("Couldn't send. Try again in a moment.");
+      }
+    });
+  }
+
   /* ---------- decay layers under each section's content (see .sec-fx in styles.css) ---------- */
   document.querySelectorAll(".s").forEach(sec => {
     const fx = document.createElement("div");
@@ -283,7 +314,6 @@
     { a: "assets/cma_3.jpg", b: "assets/cma_2.jpg", cap: "01 — The salon. Second reading on the right." },
     { a: "assets/cma_5.jpg", b: "assets/cma_4.jpg", cap: "02 — Spotlight." },
     { a: "assets/sheet.png", cap: "03 — Early mouse exploration." },
-    { a: "assets/street.jpg", cap: "04 — The street, 1968." },
   ];
   const gal = document.querySelector(".gallery");
   if (gal) {

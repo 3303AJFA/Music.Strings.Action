@@ -200,8 +200,12 @@
         <span class="news-ico">MSA</span>
         <p>Publishers<br>&amp; press</p>
         <span class="news-info mono">Playable demo · Pitch deck · Game design document</span>
-        <a class="btn btn-toxic" href="mailto:notch33rsl0ve@gmail.com?subject=MSA">Get in touch</a>
+        <form class="news-form" data-endpoint="" novalidate>
+          <input type="email" name="email" placeholder="your@email.com" autocomplete="email" aria-label="Your email" required>
+          <button class="btn btn-toxic" type="submit">Get in touch</button>
+        </form>
       </div>
+      <p class="news-msg mono" role="status" aria-live="polite"></p>
       <p class="news-big">DEMO READY</p>
     </div>
     <div class="devlog-head">

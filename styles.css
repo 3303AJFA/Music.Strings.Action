@@ -479,6 +479,7 @@ html.intro-run .hero-tag, html.intro-run .s-hero .stores { animation: intro-late
 .s-strings .num { margin: 0 auto 50px; }
 .strings-grid { display: grid; grid-template-columns: 340px 1fr; gap: 40px; max-width: 1240px; margin: 0 auto; }
 .intro { margin: 0 0 24px; max-width: 320px; }
+.strings-left .intro { background: var(--paper); border-radius: 8px; padding: 14px 16px; box-shadow: 0 1px 0 rgba(0,0,0,.2); }
 .string-card { background: var(--paper); border-radius: 8px; padding: 18px; box-shadow: 0 1px 0 rgba(0,0,0,.2); }
 .sc-head { display: flex; gap: 10px; align-items: stretch; margin-bottom: 18px; }
 .sc-key { width: 64px; display: grid; place-items: center; background: var(--ink); color: var(--paper); font-weight: 900; font-size: 32px; border-radius: 6px; }
@@ -537,6 +538,9 @@ html.intro-run .hero-tag, html.intro-run .s-hero .stores { animation: intro-late
 .news-ico { font-weight: 900; font-size: 13px; border: 1.5px solid var(--toxic); color: var(--toxic); padding: 8px 6px; border-radius: 5px; }
 .news p { margin: 0; font-weight: 800; font-size: 11px; text-transform: uppercase; line-height: 1.15; }
 .news-info { font-size: 11px; opacity: .8; }
+.news-form { display: flex; gap: 8px; flex-wrap: wrap; }
+.news input:focus { outline: 2px solid var(--toxic); outline-offset: 2px; }
+.news-form.sent { opacity: .5; pointer-events: none; }
 .news input {
   width: 240px; max-width: 100%; background: rgba(236, 226, 205, .92); border: 0; border-radius: 5px; padding: 11px 12px;
   font: 12px var(--mono); color: var(--tar);
