@@ -75,7 +75,6 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .logo { text-decoration: none; }
 .nav-links { display: flex; gap: 22px; margin-left: auto; }
 .nav-links a { text-decoration: none; font-weight: 700; font-size: 12px; letter-spacing: .04em; text-transform: uppercase; }
-.nav-links a:hover { text-decoration: underline; }
 .btn {
   display: inline-flex; align-items: center; gap: 8px;
   font-weight: 800; font-size: 12px; text-transform: uppercase; letter-spacing: .04em;
@@ -98,7 +97,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 }
 
 /* ---------- intro: the main menu's PLAY transition played backwards ----------
-   menu: rot + vignette creep in, Vivus shakes, title grows, cut to black.
+   menu: rot + vignette creep in, title grows, cut to black.
    site: starts there and comes back to clean paper (main.js drives it). */
 .intro-l { display: none; position: fixed; inset: 0; z-index: 70; pointer-events: none; }
 html.intro-on .intro-l { display: block; }
@@ -301,51 +300,11 @@ html.intro-on .hero-tag, html.intro-on .s-hero .stores { opacity: 0; }
   96.55% { opacity: 0.875; }
   100.00% { opacity: 1.000; }
 }
-@keyframes intro-shake {
-  0.00% { transform: translate(-0.0px, 0.0px); }
-  2.78% { transform: translate(0.0px, -0.0px); }
-  5.56% { transform: translate(0.0px, 0.0px); }
-  8.33% { transform: translate(-0.0px, 0.0px); }
-  11.11% { transform: translate(-2.9px, -2.3px); }
-  13.89% { transform: translate(-0.9px, 1.1px); }
-  16.67% { transform: translate(-4.5px, 2.2px); }
-  19.44% { transform: translate(4.0px, 0.1px); }
-  22.22% { transform: translate(3.5px, 1.5px); }
-  25.00% { transform: translate(3.9px, -3.8px); }
-  27.78% { transform: translate(-1.7px, -0.4px); }
-  30.56% { transform: translate(-4.8px, 5.7px); }
-  33.33% { transform: translate(1.6px, -4.8px); }
-  36.11% { transform: translate(1.0px, -1.0px); }
-  38.89% { transform: translate(-3.7px, -4.1px); }
-  41.67% { transform: translate(-0.5px, -5.2px); }
-  44.44% { transform: translate(0.8px, 0.2px); }
-  47.22% { transform: translate(-4.5px, 4.5px); }
-  50.00% { transform: translate(-5.5px, -3.9px); }
-  52.78% { transform: translate(3.8px, -3.4px); }
-  55.56% { transform: translate(-0.9px, 0.7px); }
-  58.33% { transform: translate(-0.8px, -0.1px); }
-  61.11% { transform: translate(0.1px, -0.2px); }
-  63.89% { transform: translate(-5.3px, 3.8px); }
-  66.67% { transform: translate(-2.6px, -5.4px); }
-  69.44% { transform: translate(-1.1px, 3.8px); }
-  72.22% { transform: translate(1.5px, -0.5px); }
-  75.00% { transform: translate(-0.3px, -3.4px); }
-  77.78% { transform: translate(1.4px, -1.8px); }
-  80.56% { transform: translate(-5.2px, -4.4px); }
-  83.33% { transform: translate(-4.9px, 2.2px); }
-  86.11% { transform: translate(4.6px, 3.1px); }
-  88.89% { transform: translate(-3.4px, -4.2px); }
-  91.67% { transform: translate(0.0px, -0.0px); }
-  94.44% { transform: translate(-0.0px, 0.0px); }
-  97.22% { transform: translate(0.0px, 0.0px); }
-  100.00% { transform: translate(-0.0px, -0.0px); }
-}
 html.intro-run .intro-black { animation: intro-black 1.45s linear both; }
 html.intro-run .intro-grime { animation: intro-grime 1.45s linear both; }
 html.intro-run .intro-dust { animation: intro-dust 1.45s linear both; }
 html.intro-run .intro-vig { animation: intro-vig 1.45s linear both; }
 html.intro-run .hero-title { animation: intro-title 1.45s linear both; }
-html.intro-run .hero-vivus { animation: intro-shake 1.45s steps(1, end) both, bob .5s ease-in-out infinite alternate; }
 html.intro-run .hero-tag, html.intro-run .s-hero .stores { animation: intro-late 1.45s linear both; }
 
 /* ---------- 01 hero ---------- */
@@ -372,11 +331,6 @@ html.intro-run .hero-tag, html.intro-run .s-hero .stores { animation: intro-late
   display: block; font-weight: 900; font-size: min(42vw, 58vh); letter-spacing: -0.07em;
   color: transparent; -webkit-text-stroke: 2px rgba(29, 25, 21, .85);
   filter: url(#brush); padding-right: .07em;
-}
-.hero-vivus {
-  grid-area: 1 / 1; align-self: center; width: min(46vw, 48vh); margin-top: 6vh;
-  animation: bob .5s ease-in-out infinite alternate; /* 120 BPM */
-  filter: drop-shadow(0 18px 16px rgba(60, 30, 20, .18));
 }
 @keyframes bob { from { translate: 0 0; rotate: -1.5deg; } to { translate: 0 -8px; rotate: 1.5deg; } }
 .hero-sub {
@@ -651,6 +605,41 @@ html.intro-run .hero-tag, html.intro-run .s-hero .stores { animation: intro-late
   .news-big.news-big { font-size: 34px; }
   .dl { bottom: 50px; }
 }
+/* ---------- flip buttons: the face tips back, the red face rolls up from below ---------- */
+.flip {
+  display: inline-grid; perspective: 10em; transform-style: preserve-3d;
+  background: none !important; border: 0 !important; padding: 0 !important; min-width: 0 !important; box-shadow: none !important;
+  text-decoration: none !important; -webkit-tap-highlight-color: transparent; transition: scale .15s cubic-bezier(.4, 0, .2, 1);
+}
+.flip:active { scale: .925; }
+.flip:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; border-radius: 6px; }
+.flip > .face {
+  grid-area: 1 / 1; margin: 0 !important; backface-visibility: hidden; transform-style: preserve-3d; pointer-events: none;
+  --ease: cubic-bezier(.32, .72, 0, 1);
+}
+.flip > .face.def {
+  transform-origin: top; opacity: 1;
+  transition: translate .4s 50ms var(--ease), rotate .4s 50ms var(--ease), scale .4s 50ms var(--ease), opacity .1s 50ms linear;
+}
+.flip > .face.hov {
+  transform-origin: bottom; opacity: 0; translate: 0 15%; rotate: x -85deg; scale: .55;
+  background: var(--red); color: var(--cream); border-color: var(--red);
+  transition: translate .4s var(--ease), rotate .4s var(--ease), scale .4s var(--ease), opacity .1s 75ms linear;
+}
+.btn-toxic.flip > .face.hov { background: var(--ink); color: var(--toxic); border-color: var(--ink); }
+.nav-links .flip > .face { padding: 6px 8px; border-radius: 5px; }
+.nav-links { gap: 8px; }
+@media (hover: hover) and (pointer: fine) {
+  .flip:is(:hover, :focus-visible) > .face.def {
+    opacity: 0; translate: 0 -15%; rotate: x 85deg; scale: .55;
+    transition: translate .5s 50ms var(--ease), rotate .55s 50ms var(--ease), scale .55s 50ms var(--ease), opacity .1s 50ms linear;
+  }
+  .flip:is(:hover, :focus-visible) > .face.hov {
+    opacity: 1; translate: 0; rotate: x 0deg; scale: 1;
+    transition: translate .5s .1s var(--ease), rotate .55s .1s var(--ease), scale .55s .1s var(--ease), opacity .1s 75ms linear;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
   html { scroll-behavior: auto; }

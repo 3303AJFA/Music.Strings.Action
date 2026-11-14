@@ -93,6 +93,20 @@
   addEventListener("resize", onScroll);
   onScroll();
 
+  /* ---------- flip buttons (two faces: the current one tips back, the red one rolls up) ----------
+     Each face is a span carrying the button's own classes, so it keeps the button's look; the link itself becomes a bare frame. */
+  document.querySelectorAll(".nav-links a, .nav-cta, .store, .btn-toxic").forEach(el => {
+    const cls = [...el.classList].join(" ");
+    const def = document.createElement("span");
+    def.className = cls + " face def";
+    while (el.firstChild) def.appendChild(el.firstChild);
+    const hov = def.cloneNode(true);
+    hov.className = cls + " face hov";
+    hov.setAttribute("aria-hidden", "true");
+    el.append(def, hov);
+    el.classList.add("flip");
+  });
+
   /* ---------- intro: MainMenuScreen.Leave() reversed (same timings and curves, time runs backwards) ----------
      Leave(): rot 0->1 over 1.1 s and vignette over 1.3 s (InQuad), Vivus shakes 6 px for 1.3 s, title 1 -> 1.04
      over 1.4 s, buttons and tagline out in 0.4 s, at 1.0 s black in over 0.45 s. Whole thing = 1.45 s.
