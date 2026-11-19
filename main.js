@@ -237,7 +237,7 @@
 
   /* ---------- characters ---------- */
   const CHARS = [
-    { name: "Vivus", alias: "The Kid", age: "14", role: "Guitarist, cool son", img: "assets/vivus_kid.png", aka: "hand",
+    { name: "Vivus", alias: "The Kid", age: "14", role: "Guitarist, cool son", img: "assets/vivus_drawn.png", aka: "hand",
       line: "“Mom's just out on church business. She'll be back by supper. She always is.”" },
     { name: "Mother", alias: "The Rock Nun", aliasHtml: 'The <span class="graffiti">Rock</span> Nun', age: "?", role: "Sister of the White Hand?", img: "assets/mother.png", aka: "hand",
       line: "“The Hand gave us supper. The Lord gave us distortion. Guess which one I thank.”" },
