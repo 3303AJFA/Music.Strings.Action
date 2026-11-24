@@ -111,7 +111,7 @@ html.intro-on .intro-l { display: block; }
 .intro-dust { background: url(assets/grime.png) repeat; background-size: 520px; background-position: 210px 140px; filter: invert(1); opacity: .38; }
 .intro-vig { background: radial-gradient(ellipse at 50% 45%, transparent 45%, rgba(10, 6, 4, .85) 120%); }
 .intro-black { background: #000; }
-html.intro-on .hero-tag, html.intro-on .s-hero .stores { opacity: 0; }
+html.intro-on .hero-tag, html.intro-on .s-hero .stores, html.intro-on .s-hero .socials { opacity: 0; }
 /* CSS animations, so the browser runs them off the main thread */
 /* generated from MainMenuScreen.Leave() timings, time reversed (see main.js intro) */
 @keyframes intro-black {
@@ -311,7 +311,7 @@ html.intro-run .intro-grime { animation: intro-grime 1.45s linear both; }
 html.intro-run .intro-dust { animation: intro-dust 1.45s linear both; }
 html.intro-run .intro-vig { animation: intro-vig 1.45s linear both; }
 html.intro-run .hero-title { animation: intro-title 1.45s linear both; }
-html.intro-run .hero-tag, html.intro-run .s-hero .stores { animation: intro-late 1.45s linear both; }
+html.intro-run .hero-tag, html.intro-run .s-hero .stores, html.intro-run .s-hero .socials { animation: intro-late 1.45s linear both; }
 
 /* ---------- 01 hero ---------- */
 .s-hero {
@@ -351,6 +351,14 @@ html.intro-run .hero-tag, html.intro-run .s-hero .stores { animation: intro-late
 }
 .store b { font-weight: 900; font-size: 15px; letter-spacing: -0.02em; }
 .store i { font-style: normal; font: 10px var(--mono); opacity: .7; }
+.socials { display: flex; flex-wrap: wrap; gap: 4px; justify-content: center; margin-top: 14px; }
+.socials a { display: inline-flex; align-items: center; gap: 8px; min-width: 40px; min-height: 40px; justify-content: center; color: inherit; text-decoration: none; border-radius: 6px; transition: color .2s, translate .2s; }
+.socials a:hover { color: var(--red); translate: 0 -2px; }
+.socials a:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+.socials svg { width: 20px; height: 20px; fill: currentColor; }
+.socials span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+.socials.big { gap: 6px 22px; margin-top: 0; }
+.socials.big span { position: static; width: auto; height: auto; clip-path: none; font: 700 12px var(--mono); }
 .scroll-hint { position: absolute; bottom: 18px; left: 50%; width: 2px; height: 34px; background: rgba(29,25,21,.18); overflow: hidden; }
 .scroll-hint span { position: absolute; left: 0; width: 100%; height: 40%; background: var(--ink); animation: hint 1.6s ease-in-out infinite; }
 @keyframes hint { from { top: -40%; } to { top: 100%; } }
